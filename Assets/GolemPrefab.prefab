@@ -692,6 +692,7 @@ GameObject:
   - component: {fileID: 2837545032665169462}
   - component: {fileID: -1876714407002253246}
   - component: {fileID: 8843257789182850434}
+  - component: {fileID: -8075005444105402076}
   m_Layer: 0
   m_Name: GolemPrefab
   m_TagString: Untagged
@@ -707,7 +708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2753813616496947020}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.89, y: 0, z: 0}
+  m_LocalPosition: {x: -3.89, y: 0.021, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -726,7 +727,7 @@ Animator:
   m_GameObject: {fileID: 2753813616496947020}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8b2d11d64877f0b4cad5d45ec7d53473, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bfeae0f88ba660e4c804b080a2fd58f2, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -763,10 +764,23 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 1.0976996
+  m_Height: 3.9577513
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.030094147, y: 1.9222121, z: 0}
+--- !u!114 &-8075005444105402076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2753813616496947020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd38d0951f8c32f40a4968d6159f77bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navPoint: {fileID: 0}
 --- !u!1 &2753828493615382562
 GameObject:
   m_ObjectHideFlags: 0
