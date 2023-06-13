@@ -36,7 +36,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         //目標地点まで行った？
-        if (GetComponent<NavMeshAgent>().remainingDistance == 0f)
+        if (GetComponent<NavMeshAgent>().remainingDistance < 0.1f)
         {
             //次の地点
             counter++;
