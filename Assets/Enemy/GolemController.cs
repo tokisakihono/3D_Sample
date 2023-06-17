@@ -50,4 +50,13 @@ public class GolemController : MonoBehaviour
             }
         }
     }
+
+    void OnCollisionEnter(Collision other)
+    {
+        //ƒ^ƒO
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("“–‚½‚Á‚½");   
+        }
+        }
 }
