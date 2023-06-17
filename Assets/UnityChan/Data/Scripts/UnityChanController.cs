@@ -86,9 +86,10 @@ namespace UnityChan
 
 		// 地面との接触状態
 		private GroundCollision groundCollision;
+        
 
-		// 各アニメーターパラメータのハッシュ(ID)
-		private static readonly int SpeedParam = Animator.StringToHash(SpeedParamName);
+        // 各アニメーターパラメータのハッシュ(ID)
+        private static readonly int SpeedParam = Animator.StringToHash(SpeedParamName);
 		private static readonly int DirectionParam = Animator.StringToHash(DirectionParamName);
 		private static readonly int GroundedParam = Animator.StringToHash(GroundedParamName);
 		private static readonly int JumpParam = Animator.StringToHash(JumpParamName);
@@ -140,12 +141,16 @@ namespace UnityChan
 			ResetGroundCollision();
 		}
 
+		//アイテムカウンター
+		private int itemCounter = 0;
+
 		// 衝突時
 		private void OnCollisionStay(Collision collision)
 		{
 			DetectGroundCollision(collision);
 		}
 
+		//敵との衝突
 		void OnCollisionEnter(Collision other) {
 
 			if (other.gameObject.tag == "EnemyTag")
@@ -155,8 +160,19 @@ namespace UnityChan
 			Debug.Log("死んだ");
 		}
 
-		// 踏み切り時
-		private void OnTakeOff()
+		//アイテム取得
+        void OnTriggerEnter(Collider other)
+        {
+            
+			if (other.gameObject.tag == "ItemTag")
+            {
+
+				Destroy(other.gameObject);
+
+			}
+        }
+        // 踏み切り時
+        private void OnTakeOff()
 		{
 			TakeOff();
 		}
