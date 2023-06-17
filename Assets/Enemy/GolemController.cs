@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 //NavMesh
 using UnityEngine.AI;
 
-public class EnemyController : MonoBehaviour
+public class GolemController : MonoBehaviour
 {
     //地点（親オブジェクト）
     public GameObject Navi;
