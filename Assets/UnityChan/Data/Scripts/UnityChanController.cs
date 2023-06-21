@@ -142,10 +142,17 @@ namespace UnityChan
 		}
 
 		//アイテムカウンター
-		private int itemCounter = 0;
+		private int itemCounterRed = 0;
+		private int itemCounterGreen = 0;
+		private int itemCounterPurple = 0;
 		private GameObject RedText;
 		private GameObject GreenText;
 		private GameObject PurpleText;
+
+		//プレイヤーライフ
+		private int Life = 3;
+		//UI
+		private GameObject LifeText;
 
 		void Start()
 		{
@@ -171,13 +178,41 @@ namespace UnityChan
 				//グルント
 				if (other.gameObject.name == "Grunt")
 				{
+					Life--;
+					this.LifeText.GetComponent<Text>().text = "Life" + this.Life;
 
+					//ライフ0？
+					if(Life <= 0)
+                    {
+						GetComponent<Animator>().SetTrigger("Die");
+
+                    }
+                    else
+                    {
+
+						GetComponent<Animator>().SetTrigger("Damage");
+
+                    }
 				}
 
 				//ゴーレム
 				if (other.gameObject.name == "Golem")
 				{
 
+					Life--;
+					this.LifeText.GetComponent<Text>().text = "Life" + this.Life;
+
+					//ライフ0？
+					if (Life <= 0)
+                    {
+						GetComponent<Animator>().SetTrigger("Die");
+
+                    }
+                    else
+                    {
+						GetComponent<Animator>().SetTrigger("Damage");
+
+                    }
 				}
 
 				//ゴーレム（つの）
@@ -185,8 +220,7 @@ namespace UnityChan
 				{
 
 
-					GetComponent<Animator>().SetTrigger("Damage");
-					Debug.Log("ゴーレム（つの）ダメージ");
+					
 
 
 
@@ -207,8 +241,8 @@ namespace UnityChan
 						if (other.gameObject.name == "Red")
 						{
 							//アイテムカウンター
-							itemCounter++;
-							this.RedText.GetComponent<Text>().text = "Red" + this.itemCounter;
+							itemCounterRed++;
+							this.RedText.GetComponent<Text>().text = "Red" + this.itemCounterRed;
 							//アイテム削除
 							Destroy(other.gameObject);
 						}
@@ -217,8 +251,8 @@ namespace UnityChan
 						if (other.gameObject.name == "Green")
 						{
 							//アイテムカウンター
-							itemCounter++;
-							this.GreenText.GetComponent<Text>().text = "Green" + this.itemCounter;
+							itemCounterGreen++;
+							this.GreenText.GetComponent<Text>().text = "Green" + this.itemCounterGreen;
 							//アイテム削除
 							Destroy(other.gameObject);
 						}
@@ -227,8 +261,8 @@ namespace UnityChan
 						if (other.gameObject.name == "Purple")
 						{
 							//アイテムカウンター
-							itemCounter++;
-							this.PurpleText.GetComponent<Text>().text = "Purple" + this.itemCounter;
+							itemCounterPurple++;
+							this.PurpleText.GetComponent<Text>().text = "Purple" + this.itemCounterPurple;
 							//アイテム削除
 							Destroy(other.gameObject);
 						}
