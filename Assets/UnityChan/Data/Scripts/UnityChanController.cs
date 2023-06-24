@@ -123,23 +123,46 @@ namespace UnityChan
 		// 状態更新
 		private void Update()
 		{
-			HandleInput();
+            //ゲームオーバー
+            if (isEnd)
+            {
+				//移動量と回転量をすべてゼロ
+				this.rigidbodyCache.velocity = Vector3.zero;
+				this.rigidbodyCache.angularVelocity = Vector3.zero;
 
-			UpdateAnimatorParams();
+            }
+            else
+            {
+				HandleInput();
+
+				UpdateAnimatorParams();
+			}
 		}
 
 		// 物理演算の状態更新
 		private void FixedUpdate()
 		{
-			UpdateGround();
+            if (isEnd)
+            {
+				//何もしない
 
-			UpdateRotation();
-			AddGravity();
-			AddMovementForce();
-			LimitUpwardVelocity();
+            }
 
-			ResetGroundCollision();
+            else
+            {
+				UpdateGround();
+
+				UpdateRotation();
+				AddGravity();
+				AddMovementForce();
+				LimitUpwardVelocity();
+
+				ResetGroundCollision();
+			}
 		}
+
+		//ゲーム終了の判定
+		private bool isEnd = false;
 
 		//アイテムカウンター
 		private int itemCounterRed = 0;
@@ -151,8 +174,10 @@ namespace UnityChan
 
 		//プレイヤーライフ
 		private int Life = 3;
+		
 		//UI
 		private GameObject LifeText;
+
 
 		void Start()
 		{
@@ -160,6 +185,8 @@ namespace UnityChan
 			this.RedText = GameObject.Find("RedText");
 			this.GreenText = GameObject.Find("GreenText");
 			this.PurpleText = GameObject.Find("PurpleText");
+
+			this.LifeText = GameObject.Find("LifeText");
 
 		}
 		// 衝突時
@@ -178,55 +205,76 @@ namespace UnityChan
 				//グルント
 				if (other.gameObject.name == "Grunt")
 				{
-					Life--;
-					this.LifeText.GetComponent<Text>().text = "Life" + this.Life;
+					if (itemCounterRed < 10 || itemCounterGreen < 8 || itemCounterPurple < 5)
+					{
+						Life--;
+						this.LifeText.GetComponent<Text>().text = "Life " + this.Life;
 
-					//ライフ0？
-					if(Life <= 0)
-                    {
-						GetComponent<Animator>().SetTrigger("Die");
+						//ライフ0？
+						if (Life <= 0)
+						{
+							this.isEnd = true;
+							this.LifeText.GetComponent<Text>().text = "Life 0";
+							GetComponent<Animator>().SetTrigger("Die");
 
-                    }
-                    else
-                    {
+						}
+						else
+						{
 
-						GetComponent<Animator>().SetTrigger("Damage");
+							GetComponent<Animator>().SetTrigger("Damage");
 
-                    }
+						}
+					}
 				}
 
 				//ゴーレム
 				if (other.gameObject.name == "Golem")
 				{
+					if (itemCounterGreen < 8 || itemCounterRed < 7)
+					{
+						Life--;
+						this.LifeText.GetComponent<Text>().text = "Life " + this.Life;
 
-					Life--;
-					this.LifeText.GetComponent<Text>().text = "Life" + this.Life;
+						//ライフ0？
+						if (Life <= 0)
+						{
+							this.isEnd = true;
+							this.LifeText.GetComponent<Text>().text = "Life 0";
+							GetComponent<Animator>().SetTrigger("Die");
 
-					//ライフ0？
-					if (Life <= 0)
-                    {
-						GetComponent<Animator>().SetTrigger("Die");
+						}
+						else
+						{
+							GetComponent<Animator>().SetTrigger("Damage");
 
-                    }
-                    else
-                    {
-						GetComponent<Animator>().SetTrigger("Damage");
-
-                    }
+						}
+					}
 				}
 
 				//ゴーレム（つの）
 				if (other.gameObject.name == "GolemTuno")
 				{
+					if (itemCounterRed < 6)
+					{
 
+						Life--;
+						this.LifeText.GetComponent<Text>().text = "Life " + this.Life;
 
-					
+						//ライフ0？
+						if (Life <= 0)
+						{
+							this.isEnd = true;
+							this.LifeText.GetComponent<Text>().text = "Life 0";
+							GetComponent<Animator>().SetTrigger("Die");
 
+						}
+						else
+						{
+							GetComponent<Animator>().SetTrigger("Damage");
 
-
-
-
-				}
+						}
+						}
+					}
 			}
 		}
 				//アイテム取得
@@ -242,7 +290,7 @@ namespace UnityChan
 						{
 							//アイテムカウンター
 							itemCounterRed++;
-							this.RedText.GetComponent<Text>().text = "Red" + this.itemCounterRed;
+							this.RedText.GetComponent<Text>().text = "Red " + this.itemCounterRed;
 							//アイテム削除
 							Destroy(other.gameObject);
 						}
@@ -252,7 +300,7 @@ namespace UnityChan
 						{
 							//アイテムカウンター
 							itemCounterGreen++;
-							this.GreenText.GetComponent<Text>().text = "Green" + this.itemCounterGreen;
+							this.GreenText.GetComponent<Text>().text = "Green " + this.itemCounterGreen;
 							//アイテム削除
 							Destroy(other.gameObject);
 						}
@@ -262,7 +310,7 @@ namespace UnityChan
 						{
 							//アイテムカウンター
 							itemCounterPurple++;
-							this.PurpleText.GetComponent<Text>().text = "Purple" + this.itemCounterPurple;
+							this.PurpleText.GetComponent<Text>().text = "Purple " + this.itemCounterPurple;
 							//アイテム削除
 							Destroy(other.gameObject);
 						}

@@ -8,6 +8,9 @@ using UnityEngine.AI;
 
 public class GruntController : MonoBehaviour
 {
+    //ライフ
+    private int Life = 50;
+
     //地点（親オブジェクト）
     public GameObject Navi;
 
@@ -50,12 +53,14 @@ public class GruntController : MonoBehaviour
             }
         }
     }
-    void OnCollisionEnter(Collision other)
+    public void requestDamage()
     {
-        //タグ
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("当たった");
-        }
+        //Damage
+        GetComponent<Animator>().SetTrigger("Damage");
+        //Die（セット）
+        //GetComponent<NavMeshAgent>().isStopped = true;
+        //GetComponent<Animator>().SetBool("Walk", false);
+        //GetComponent<Animator>().SetTrigger("Die");
+        Debug.Log("requestDamage");
     }
 }
