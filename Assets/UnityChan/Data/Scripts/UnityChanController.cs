@@ -225,6 +225,11 @@ namespace UnityChan
 
 						}
 					}
+                    else
+                    {
+						
+						other.gameObject.GetComponent<GruntController>().requestDamage();
+                    }
 				}
 
 				//ゴーレム
@@ -249,6 +254,11 @@ namespace UnityChan
 
 						}
 					}
+                    else
+                    {
+						
+						other.gameObject.GetComponent<GolemController>().requestDamage();
+                    }
 				}
 
 				//ゴーレム（つの）
@@ -273,8 +283,14 @@ namespace UnityChan
 							GetComponent<Animator>().SetTrigger("Damage");
 
 						}
-						}
 					}
+                    else
+                    {
+						
+
+						other.gameObject.GetComponent<GolemTunoController>().requestDamage();
+                    }
+				}
 			}
 		}
 				//アイテム取得

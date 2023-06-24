@@ -61,6 +61,6 @@ public class GruntController : MonoBehaviour
         //GetComponent<NavMeshAgent>().isStopped = true;
         //GetComponent<Animator>().SetBool("Walk", false);
         //GetComponent<Animator>().SetTrigger("Die");
-        Debug.Log("requestDamage");
+        //Debug.Log("requestDamage");
     }
 }
